@@ -8,7 +8,7 @@ public class Main{
         FileContents fileContents= new FileContents(30, 100 * 1024);
         WordFrequencies wordFrequencies= new WordFrequencies();
         /*
-        Cree e inicie los hilos AQUÍ
+        Cree e inicie los hilos AQUi
         2 FileReader y 3 FileProcessor
         */
         Tools.fileLocator(fileNames, "datos");
@@ -24,6 +24,8 @@ public class Main{
 }
 
 class Tools {
+    private Tools(){}
+
     public static void fileLocator(FileNames fn, String dirname){
         File dir = new File(dirname);
         if ( ! dir.exists() ){
@@ -39,7 +41,7 @@ class Tools {
             }
         } else {
             fn.addName(dir.getAbsolutePath());
-            //System.out.println(dir.getAbsolutePath());
+            System.out.println(dir.getAbsolutePath());
         }
     }
     public static class Order implements Comparator< Map.Entry<String,Integer> > {
