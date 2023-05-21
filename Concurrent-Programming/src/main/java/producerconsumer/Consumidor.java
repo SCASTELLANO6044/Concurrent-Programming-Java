@@ -11,6 +11,7 @@ public class Consumidor extends Thread {
         iteraciones = n;
     }
 
+    @Override
     public void run() {
         try {
             for (int i = 0; i < iteraciones; i++) {
