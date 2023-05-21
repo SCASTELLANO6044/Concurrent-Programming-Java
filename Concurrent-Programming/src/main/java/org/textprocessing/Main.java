@@ -11,7 +11,8 @@ public class Main{
         Cree e inicie los hilos AQUi
         2 FileReader y 3 FileProcessor
         */
-        Tools.fileLocator(fileNames, "datos");
+        Tools.fileLocator(fileNames, "/datos/");
+        System.out.println(fileNames.toString());
         fileNames.noMoreNames();
         /*
         Esperar a que terminen los hilos creados
