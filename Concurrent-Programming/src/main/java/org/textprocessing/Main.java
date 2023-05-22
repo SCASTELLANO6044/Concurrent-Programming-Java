@@ -9,6 +9,10 @@ public class Main{
         WordFrequencies wordFrequencies= new WordFrequencies();
         Tools.fileLocator(fileNames, "C:\\GitHubProjects\\Concurrent-Programming-Java\\Concurrent-Programming\\datos");
         fileNames.noMoreNames();
+        FileReader fileReader1 = new FileReader(fileNames, fileContents);
+        FileReader fileReader2 = new FileReader(fileNames, fileContents);
+        fileReader1.start();
+        fileReader2.start();
         /*
         Cree e inicie los hilos AQUi
         2 FileReader y 3 FileProcessor
