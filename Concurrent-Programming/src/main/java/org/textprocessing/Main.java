@@ -7,13 +7,12 @@ public class Main{
         FileNames fileNames= new FileNames();
         FileContents fileContents= new FileContents(30, 100 * 1024);
         WordFrequencies wordFrequencies= new WordFrequencies();
+        Tools.fileLocator(fileNames, "C:\\GitHubProjects\\Concurrent-Programming-Java\\Concurrent-Programming\\datos");
+        fileNames.noMoreNames();
         /*
         Cree e inicie los hilos AQUi
         2 FileReader y 3 FileProcessor
         */
-        Tools.fileLocator(fileNames, "/datos/");
-        System.out.println(fileNames.toString());
-        fileNames.noMoreNames();
         /*
         Esperar a que terminen los hilos creados
         */
