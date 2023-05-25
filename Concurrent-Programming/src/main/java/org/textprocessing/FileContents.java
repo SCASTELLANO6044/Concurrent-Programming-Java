@@ -1,22 +1,46 @@
 package org.textprocessing;
 import java.util.Queue;
 public class FileContents {
-    private Queue<String> queue;
-    private int registerCount = 0;
-    private boolean closed = false;
+    private volatile Queue<String> queue;
+    private volatile int registerCount = 0;
+    private final int maxFiles;
+    private final int maxChars;
     public FileContents(int maxFiles, int maxChars) {
-
+        this.maxFiles = maxFiles;
+        this.maxChars = maxChars;
     }
-    public void registerWriter() {
-
+    public synchronized void registerWriter() {
+        registerCount++;
     }
-    public void unregisterWriter() {
-
+    public synchronized void unregisterWriter() {
+        registerCount--;
     }
-    public void addContents(String contents) {
-
+    public synchronized void addContents(String contents) {
+        while (queue.size() >= maxFiles){
+            try {
+                wait();
+            }catch (Exception e){
+                System.out.println(e.getStackTrace());
+            }
+        }
+        if (queue.isEmpty()){
+            queue.add(contents);
+        } else if (queue.isEmpty() && contents.length() < maxChars) {
+            queue.add(contents);
+        }
     }
-    public String getContents() {
-        return null;
+    public synchronized String getContents() {
+        while (queue.isEmpty()){
+            try {
+                wait();
+            }catch (Exception e){
+                System.out.println(e.getStackTrace());
+            }
+        }
+        if(this.registerCount <= 0){
+            return null;
+        }else {
+            return queue.poll();
+        }
     }
 }
