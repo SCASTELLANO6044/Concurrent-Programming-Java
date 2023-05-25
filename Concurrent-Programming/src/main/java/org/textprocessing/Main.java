@@ -4,31 +4,35 @@ import java.io.*;
 
 public class Main{
     public static void main(String[] args) {
+
         FileNames fileNames= new FileNames();
         FileContents fileContents= new FileContents(30, 100 * 1024);
         WordFrequencies wordFrequencies= new WordFrequencies();
+
         Tools.fileLocator(fileNames, "C:\\GitHubProjects\\Concurrent-Programming-Java\\Concurrent-Programming\\datos");
-        fileNames.noMoreNames();
+
         FileReader fileReader1 = new FileReader(fileNames, fileContents);
         FileReader fileReader2 = new FileReader(fileNames, fileContents);
         FileProcessor fileProcessor1 = new FileProcessor(fileContents, wordFrequencies);
         FileProcessor fileProcessor2 = new FileProcessor(fileContents, wordFrequencies);
         FileProcessor fileProcessor3 = new FileProcessor(fileContents, wordFrequencies);
         fileReader1.start();
-//        fileReader2.start();
+        fileReader2.start();
         fileProcessor1.start();
-//        fileProcessor2.start();
-//        fileProcessor3.start();
+        fileProcessor2.start();
+        fileProcessor3.start();
 
         try {
             fileReader1.join();
-//            fileReader2.join();
+            fileReader2.join();
             fileProcessor1.join();
-//            fileProcessor2.join();
-//            fileProcessor3.join();
+            fileProcessor2.join();
+            fileProcessor3.join();
         }catch (InterruptedException e){
             System.out.println("Interrupted thread");
+            Thread.currentThread().interrupt();
         }
+        fileNames.noMoreNames();
 
         for( String palabra : Tools.wordSelector(wordFrequencies.getFrequencies())) {
             System.out.println(palabra);
@@ -71,7 +75,7 @@ class Tools {
         Set<Map.Entry<String,Integer>> orderSet= new TreeSet<Map.Entry<String,Integer>>(
                 new Order());
         orderSet.addAll(set);
-        List<String> l = new LinkedList<String>();
+        List<String> l = new LinkedList<>();
         int i=0;
         for ( Map.Entry<String,Integer> pair: orderSet){
             l.add(pair.getValue() + " " + pair.getKey() );

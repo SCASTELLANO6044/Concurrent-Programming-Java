@@ -1,7 +1,7 @@
 package org.textprocessing;
 public class FileReader extends Thread{
-    private FileNames fileNames;
-    private FileContents fileContents;
+    private final FileNames fileNames;
+    private final FileContents fileContents;
     public FileReader(FileNames fileNames, FileContents fileContents){
         this.fileNames = fileNames;
         this.fileContents = fileContents;

@@ -1,4 +1,5 @@
 package org.textprocessing;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 public class FileNames {
@@ -14,7 +15,8 @@ public class FileNames {
             try {
                 wait();
             }catch (Exception e){
-                System.out.println(e.getStackTrace());
+                System.out.println(Arrays.toString(e.getStackTrace()));
+                Thread.currentThread().interrupt();
             }
         }
         count++;
@@ -25,16 +27,20 @@ public class FileNames {
             try {
                 wait();
             }catch (Exception e){
-                System.out.println(e.getStackTrace());
+                System.out.println(Arrays.toString(e.getStackTrace()));
+                Thread.currentThread().interrupt();
             }
         }
         if (isClosed){
+            notifyAll();
             return null;
         }else {
+            notifyAll();
             return queue.poll();
         }
     }
     public synchronized void noMoreNames() {
         this.isClosed = true;
+        notifyAll();
     }
 }

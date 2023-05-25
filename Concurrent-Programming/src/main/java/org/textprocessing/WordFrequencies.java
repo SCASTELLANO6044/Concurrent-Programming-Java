@@ -5,7 +5,8 @@ import java.util.Set;
 
 public class WordFrequencies {
     private volatile Map<String, Integer> wordFrecuenciesMap = new HashMap<>();
-    public void addFrequencies(Map<String,Integer> f){
+
+    public synchronized void addFrequencies(Map<String,Integer> f){
         Set<String> keySet = f.keySet();
         for (String key : keySet){
             if (wordFrecuenciesMap.containsKey(key)){
@@ -14,8 +15,10 @@ public class WordFrequencies {
                 wordFrecuenciesMap.put(key, 1);
             }
         }
+        notifyAll();
     }
-    public Map<String,Integer> getFrequencies(){
+    public synchronized Map<String,Integer> getFrequencies(){
+        notifyAll();
         return wordFrecuenciesMap;
     }
 }

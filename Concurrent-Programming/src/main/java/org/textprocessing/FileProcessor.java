@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class FileProcessor extends Thread{
 
-    private FileContents fileContents;
-    private WordFrequencies wordFrequencies;
+    private final FileContents fileContents;
+    private final WordFrequencies wordFrequencies;
 
     public FileProcessor(FileContents fileContents, WordFrequencies wordFrequencies){
         this.fileContents = fileContents;
