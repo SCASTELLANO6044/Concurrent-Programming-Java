@@ -12,7 +12,11 @@ public class FileReader extends Thread{
         String fileName = fileNames.getName();
         while (fileName != null){
             String fileContent = Tools.getContents(fileName);
+
+            this.fileContents.registerWriter();
             this.fileContents.addContents(fileContent);
+            this.fileContents.unregisterWriter();
+
             fileName = fileNames.getName();
         }
     }
