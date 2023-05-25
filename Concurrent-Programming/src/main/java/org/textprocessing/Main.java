@@ -20,13 +20,15 @@ public class Main{
         fileProcessor2.start();
         fileProcessor3.start();
 
-        /*
-        Cree e inicie los hilos AQUi
-        2 FileReader y 3 FileProcessor
-        */
-        /*
-        Esperar a que terminen los hilos creados
-        */
+        try {
+            fileReader1.join();
+            fileReader2.join();
+            fileProcessor1.join();
+            fileProcessor2.join();
+            fileProcessor3.join();
+        }catch (InterruptedException e){
+            System.out.println("Interrupted thread");
+        }
 
         for( String palabra : Tools.wordSelector(wordFrequencies.getFrequencies())) {
             System.out.println(palabra);
