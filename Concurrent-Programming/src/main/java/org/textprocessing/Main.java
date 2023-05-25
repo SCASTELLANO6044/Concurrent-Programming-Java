@@ -15,17 +15,17 @@ public class Main{
         FileProcessor fileProcessor2 = new FileProcessor(fileContents, wordFrequencies);
         FileProcessor fileProcessor3 = new FileProcessor(fileContents, wordFrequencies);
         fileReader1.start();
-        fileReader2.start();
+//        fileReader2.start();
         fileProcessor1.start();
-        fileProcessor2.start();
-        fileProcessor3.start();
+//        fileProcessor2.start();
+//        fileProcessor3.start();
 
         try {
             fileReader1.join();
-            fileReader2.join();
+//            fileReader2.join();
             fileProcessor1.join();
-            fileProcessor2.join();
-            fileProcessor3.join();
+//            fileProcessor2.join();
+//            fileProcessor3.join();
         }catch (InterruptedException e){
             System.out.println("Interrupted thread");
         }

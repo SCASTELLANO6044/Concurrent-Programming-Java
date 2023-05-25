@@ -1,4 +1,5 @@
 package org.textprocessing;
+import java.util.LinkedList;
 import java.util.Queue;
 public class FileContents {
     private volatile Queue<String> queue;
@@ -8,6 +9,7 @@ public class FileContents {
     public FileContents(int maxFiles, int maxChars) {
         this.maxFiles = maxFiles;
         this.maxChars = maxChars;
+        this.queue = new LinkedList<>();
     }
     public synchronized void registerWriter() {
         registerCount++;
