@@ -11,8 +11,15 @@ public class Main{
         fileNames.noMoreNames();
         FileReader fileReader1 = new FileReader(fileNames, fileContents);
         FileReader fileReader2 = new FileReader(fileNames, fileContents);
+        FileProcessor fileProcessor1 = new FileProcessor(fileContents, wordFrequencies);
+        FileProcessor fileProcessor2 = new FileProcessor(fileContents, wordFrequencies);
+        FileProcessor fileProcessor3 = new FileProcessor(fileContents, wordFrequencies);
         fileReader1.start();
         fileReader2.start();
+        fileProcessor1.start();
+        fileProcessor2.start();
+        fileProcessor3.start();
+
         /*
         Cree e inicie los hilos AQUi
         2 FileReader y 3 FileProcessor
