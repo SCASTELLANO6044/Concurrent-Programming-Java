@@ -35,6 +35,7 @@ public class FileNames {
             notifyAll();
             return null;
         }else {
+            count--;
             notifyAll();
             return queue.poll();
         }
