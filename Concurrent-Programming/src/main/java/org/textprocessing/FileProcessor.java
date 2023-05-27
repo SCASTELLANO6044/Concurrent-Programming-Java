@@ -19,7 +19,7 @@ public class FileProcessor extends Thread{
         Map<String, Integer> wordFrequencyMap = new HashMap<>();
         while (fileContent != null){
 
-            String[] wordsList = fileContent.split(" ");
+            String[] wordsList = fileContent.split("[^\\p{IsAlphabetic}\\d]+");
             for (String word : wordsList){
                 if (wordFrequencyMap.containsKey(word)){
                     wordFrequencyMap.put(word, wordFrequencyMap.get(word) + 1);
