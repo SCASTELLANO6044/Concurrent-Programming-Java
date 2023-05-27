@@ -9,15 +9,13 @@ public class FileReader extends Thread{
 
     @Override
     public void run (){
+        this.fileContents.registerWriter();
         String fileName = fileNames.getName();
         while (fileName != null){
             String fileContent = Tools.getContents(fileName);
-
-            this.fileContents.registerWriter();
             this.fileContents.addContents(fileContent);
-            this.fileContents.unregisterWriter();
-
             fileName = fileNames.getName();
         }
+        this.fileContents.unregisterWriter();
     }
 }

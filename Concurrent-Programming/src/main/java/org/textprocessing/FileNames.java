@@ -11,16 +11,10 @@ public class FileNames {
         this.isClosed = false;
     }
     public synchronized void addName(String fileName) {
-        while (isClosed){
-            try {
-                wait();
-            }catch (Exception e){
-                System.out.println(Arrays.toString(e.getStackTrace()));
-                Thread.currentThread().interrupt();
-            }
+        if (!isClosed){
+            count++;
+            queue.add(fileName);
         }
-        count++;
-        queue.add(fileName);
     }
     public synchronized String getName() {
         while (count <= 0){

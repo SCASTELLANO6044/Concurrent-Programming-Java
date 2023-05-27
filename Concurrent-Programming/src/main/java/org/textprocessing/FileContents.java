@@ -21,7 +21,9 @@ public class FileContents {
         notifyAll();
     }
     public synchronized void addContents(String contents) {
-        while (queue.size() >= maxFiles){
+        while ((queue.size() >= maxFiles)||
+                (registerCount <= 0)||
+                (!queue.isEmpty() && ((contents.length() + getCharsCount(this.queue)) > maxChars))){
             try {
                 wait();
             }catch (Exception e){
@@ -29,26 +31,32 @@ public class FileContents {
                 Thread.currentThread().interrupt();
             }
         }
-        if ((queue.isEmpty() || (contents.length() < maxChars)) && (registerCount > 0)) {
-            queue.add(contents);
-        }
+        queue.add(contents);
         notifyAll();
     }
     public synchronized String getContents() {
-        while (queue.isEmpty()){
-            try {
-                wait();
-            }catch (Exception e){
-                System.out.println(Arrays.toString(e.getStackTrace()));
-                Thread.currentThread().interrupt();
-            }
-        }
         if(this.registerCount <= 0){
             notifyAll();
             return null;
         }else {
+            while (queue.isEmpty()){
+                try {
+                    wait();
+                }catch (Exception e){
+                    System.out.println(Arrays.toString(e.getStackTrace()));
+                    Thread.currentThread().interrupt();
+                }
+            }
             notifyAll();
             return queue.poll();
         }
+    }
+
+    private static synchronized int getCharsCount(Queue<String> queue){
+        int i = 0;
+        for (String string : queue){
+            i += string.length();
+        }
+        return i;
     }
 }
