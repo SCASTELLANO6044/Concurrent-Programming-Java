@@ -3,12 +3,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 public class FileNames {
-    private volatile Queue<String> queue = new LinkedList<>();
+    private volatile Queue<String> queue;
     private volatile boolean isClosed;
     private volatile int count = 0;
 
     public FileNames(){
         this.isClosed = false;
+        this.queue = new LinkedList<>();
     }
     public synchronized void addName(String fileName) {
         if (!isClosed){
@@ -18,6 +19,10 @@ public class FileNames {
     }
     public synchronized String getName() {
         while (count <= 0){
+            if (isClosed){
+                notifyAll();
+                return null;
+            }
             try {
                 wait();
             }catch (Exception e){
@@ -25,14 +30,9 @@ public class FileNames {
                 Thread.currentThread().interrupt();
             }
         }
-        if (isClosed){
-            notifyAll();
-            return null;
-        }else {
-            count--;
-            notifyAll();
-            return queue.poll();
-        }
+        count--;
+        notifyAll();
+        return queue.poll();
     }
     public synchronized void noMoreNames() {
         this.isClosed = true;

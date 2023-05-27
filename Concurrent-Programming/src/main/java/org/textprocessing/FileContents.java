@@ -35,21 +35,20 @@ public class FileContents {
         notifyAll();
     }
     public synchronized String getContents() {
-        if(this.registerCount <= 0){
-            notifyAll();
-            return null;
-        }else {
-            while (queue.isEmpty()){
-                try {
-                    wait();
-                }catch (Exception e){
-                    System.out.println(Arrays.toString(e.getStackTrace()));
-                    Thread.currentThread().interrupt();
-                }
+        while (queue.isEmpty()){
+            if (this.registerCount <= 0){
+                notifyAll();
+                return null;
             }
-            notifyAll();
-            return queue.poll();
+            try {
+                wait();
+            }catch (Exception e){
+                System.out.println(Arrays.toString(e.getStackTrace()));
+                Thread.currentThread().interrupt();
+            }
         }
+        notifyAll();
+        return queue.poll();
     }
 
     private static synchronized int getCharsCount(Queue<String> queue){

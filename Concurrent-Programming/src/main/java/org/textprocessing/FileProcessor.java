@@ -24,7 +24,7 @@ public class FileProcessor extends Thread{
                 if (wordFrequencyMap.containsKey(word)){
                     wordFrequencyMap.put(word, wordFrequencyMap.get(word) + 1);
                 }else {
-                    wordFrequencyMap.put(word, 0);
+                    wordFrequencyMap.put(word, 1);
                 }
             }
             fileContent = this.fileContents.getContents();

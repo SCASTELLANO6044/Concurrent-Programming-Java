@@ -8,8 +8,6 @@
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 ;
-datos/2.txt,2\1\21b1bd94327b8fb75236e4f9728f0460556b33be
-;
 datos/3.txt,a\b\ab411079321d1292c908d458ec8ef2b530df10b1
 ;
 datos/4.txt,1\9\1962662970a408a23c2b8b2a7f4fd092ffd5ff9d

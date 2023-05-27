@@ -9,8 +9,6 @@ public class Main{
         FileContents fileContents= new FileContents(30, 100 * 1024);
         WordFrequencies wordFrequencies= new WordFrequencies();
 
-        Tools.fileLocator(fileNames, "C:\\GitHubProjects\\Concurrent-Programming-Java\\Concurrent-Programming\\datos");
-
         FileReader fileReader1 = new FileReader(fileNames, fileContents);
         FileReader fileReader2 = new FileReader(fileNames, fileContents);
         FileProcessor fileProcessor1 = new FileProcessor(fileContents, wordFrequencies);
@@ -22,6 +20,9 @@ public class Main{
         fileProcessor2.start();
         fileProcessor3.start();
 
+        Tools.fileLocator(fileNames, "C:\\GitHubProjects\\Concurrent-Programming-Java\\Concurrent-Programming\\datos");
+        fileNames.noMoreNames();
+
         try {
             fileReader1.join();
             fileReader2.join();
@@ -32,11 +33,11 @@ public class Main{
             System.out.println("Interrupted thread");
             Thread.currentThread().interrupt();
         }
-        fileNames.noMoreNames();
 
         for( String palabra : Tools.wordSelector(wordFrequencies.getFrequencies())) {
             System.out.println(palabra);
         }
+
     }
 }
 
