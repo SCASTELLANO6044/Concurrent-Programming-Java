@@ -7,9 +7,3 @@
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-;
-datos/3.txt,a\b\ab411079321d1292c908d458ec8ef2b530df10b1
-;
-datos/4.txt,1\9\1962662970a408a23c2b8b2a7f4fd092ffd5ff9d
-;
-datos/5.txt,c\c\cc5eee0e1c1c65c4a7969c133262693d0c73c2e7
